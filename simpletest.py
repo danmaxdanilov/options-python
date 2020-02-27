@@ -30,11 +30,11 @@ class WebDriverPythonBasics(unittest.TestCase):
         self.browser = webdriver.Chrome()
         with open('config.txt', 'r') as f:
             self.config = f.read().split(',')
-        directory = os.path.dirname(__file__)
-        fileList = os.listdir(directory)
-        for screenshot in fileList:
-            if screenshot.endswith('.png'):
-                os.remove(os.path.join(directory, screenshot))
+        # directory = os.path.dirname(__file__)
+        # fileList = os.listdir(directory)
+        # for screenshot in fileList:
+        #     if screenshot.endswith('.png'):
+        #         os.remove(os.path.join(directory, screenshot))
 
     def test_saucelabs_homepage_header_displayed(self):
         self.browser.get(

@@ -7,6 +7,8 @@ cd options-python
 git fetch origin
 git reset --hard origin/master
 
+rm -f *.png
+
 ## copy chromedriver
 cp -rf chromedriver /usr/local/bin/chromedriver
 
