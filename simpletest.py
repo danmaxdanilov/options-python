@@ -18,7 +18,9 @@ from io import BytesIO
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
 class WebDriverPythonBasics(unittest.TestCase):
@@ -69,6 +71,14 @@ class WebDriverPythonBasics(unittest.TestCase):
             url = 'https://www.moex.com/ru/contract.aspx?code={}'.format(
                 option)
             self.browser.get(url)
+            time.sleep(2)
+            try:
+                xpath = "//*[@id='contract']/div[3]/div[3]"
+                WebDriverWait(self.browser, 2).until(
+                    EC.presence_of_element_located((By.XPATH, xpath))
+                )
+            except TimeoutException as ex:
+                print(ex.msg)
 
             screenShotName = '{}({}).png'.format(option,
                                                  datetime.now().strftime("%d-%m-%Y"))
@@ -128,8 +138,8 @@ def full_screenshot(driver, save_path):
 
     # looping from top to bottom, append to img list
     # Ref--> https://gist.github.com/fabtho/13e4a2e7cfbfde671b8fa81bbe9359fb
-    while max_window_height - offset > height:
-
+    # while max_window_height - offset > height:
+    for x in range(0, 2):
         # Scroll to height
         driver.execute_script(f'window.scrollTo(0, {offset});')
         img = Image.open(BytesIO((driver.get_screenshot_as_png())))
