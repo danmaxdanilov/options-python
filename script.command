@@ -28,4 +28,5 @@ output_dir=$(~/Desktop/Опционы/${option_dir})
 echo $output_dir
 cd ~/play/options-python
 cp -v *.png ~/Desktop/Опционы/$option_dir
+rm -f *.png
 #find ./ -name '*.png' -exec cp -prfv '{}' '${output_dir}' ';'
